@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('smoothieApp', ['ui.bootstrap', 'gettext', 'ngSanitize', 'luegg.directives', 'xeditable', 'LocalStorageModule', 'ngFileUpload', 'chart.js',
+        .module('smoothieApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'gettext', 'ngSanitize', 'xeditable', 'LocalStorageModule', 'ngFileUpload',
             //removeIf(demo)
             /*
             //endRemoveIf(demo)
@@ -17,16 +17,10 @@
         .run(RunBlock);
 
     RunBlock.$inject = ['gettextCatalog', 'localStorageService', 'editableOptions', '$httpBackend'];
-    ConfigBlock.$inject = ['localStorageServiceProvider', 'ChartJsProvider'];
+    ConfigBlock.$inject = ['localStorageServiceProvider'];
 
-    function ConfigBlock(localStorageServiceProvider, ChartJsProvider) {
+    function ConfigBlock(localStorageServiceProvider) {
         localStorageServiceProvider.setPrefix('smoothieApp');
-
-        ChartJsProvider.setOptions({
-            colours: ['#FDB45C', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
-            responsive: true,
-            maintainAspectRatio: false
-        });
     }
 
     function RunBlock(gettextCatalog, localStorageService, editableOptions, $httpBackend) {
@@ -47,7 +41,7 @@
         var heaterT1ActualTemp = 25;
         var bedActualTemp = 22;
 
-        $httpBackend.whenPOST('/command').respond(function (method, url, data) {
+        $httpBackend.when('POST', '/command').respond(function (method, url, data) {
             //console.log('Received these data:', method, url, data);
 
             var result = "ok";
@@ -59,7 +53,7 @@
                 heaterT1ActualTemp = getRandomValue("T1");
                 bedActualTemp = getRandomValue("bed");
 
-                result = "ok T:" + heaterT0ActualTemp + " /" + heaterT0SelectedTemp + "@0 ";
+                result = "ok T0:" + heaterT0ActualTemp + " /" + heaterT0SelectedTemp + "@0 ";
                 result += "T1:" + heaterT1ActualTemp + " /" + heaterT1SelectedTemp + "@0 ";
                 result += "B:" + bedActualTemp + " /" + bedSelectedTemp + "@0 ";
                 result += "P:29.7 /0.0 @0\n";

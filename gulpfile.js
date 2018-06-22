@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     htmlmin = require('gulp-htmlmin'),
     replace = require('gulp-replace'),
     fs = require('fs'),
-    smoosher = require('gulp-smoosher')
+    //smoosher = require('gulp-smoosher')
     nginclude = require('gulp-nginclude');
 
 var demoMode = false;
@@ -40,54 +40,55 @@ function cdnizeAndCopy() {
             .pipe(removeCode({production: true}))
             .pipe(cdnizer([{
                 file: 'lib/bootstrap-css-only/css/bootstrap.min.css',
-                cdn: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
+                cdn: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
             }]))
 
             .pipe(cdnizer([{
-                file: 'lib/angular/angular.min.js',
-                cdn: 'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js'
+                file: 'lib/angular/angular.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular.js'
             }]))
             .pipe(cdnizer([{
-                file: 'lib/angular-sanitize/angular-sanitize.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.7/angular-sanitize.min.js'
+                file: 'lib/angular-route/angular-route.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular-route.js'
+            }]))
+            .pipe(cdnizer([{
+                file: 'lib/angular-resource/angular-resource.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular-resource.js'
+            }]))
+            .pipe(cdnizer([{
+                file: 'lib/angular-mocks/angular-mocks.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular-mocks.js'
+            }]))
+            .pipe(cdnizer([{
+                file: 'lib/angular-sanitize/angular-sanitize.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.0/angular-sanitize.js'
             }]))
             .pipe(cdnizer([{
                 file: 'lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js'
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js'
             }]))
             .pipe(cdnizer([{
                 file: 'lib/angular-gettext/dist/angular-gettext.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-gettext/2.3.4/angular-gettext.min.js'
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-gettext/2.3.11/angular-gettext.min.js'
             }]))
             .pipe(cdnizer([{
                 file: 'lib/angular-xeditable/dist/js/xeditable.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/js/xeditable.min.js'
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/js/xeditable.min.js'
             }]))
             .pipe(cdnizer([{
                 file: 'lib/angular-local-storage/dist/angular-local-storage.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.7/angular-local-storage.min.js'
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.7.1/angular-local-storage.min.js'
             }]))
             .pipe(cdnizer([{
                 file: 'lib/ng-file-upload/ng-file-upload.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.0.4/ng-file-upload.min.js'
-            }]))
-/*
-            // unlock when CDN version will be available
-            .pipe(cdnizer([{
-                file: 'lib/angular-chart.js/dist/angular-chart.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.0.0-alpha8/angular-chart.min.js'
-            }]))
-*/
-            .pipe(cdnizer([{
-                file: 'lib/Chart.js/dist/Chart.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js'
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js'
             }]))
             .pipe(gulp.dest('dist'))
     )
 }
 
 function concatApp() {
-    var src = ['www/js/**/app.js', 'www/js/**/translations.js', 'www/js/controllers/**/*.js', 'www/js/services/**/*.js', 'www/lib/angular-scroll-glue/src/scrollglue.js', 'www/lib/angular-chart.js/dist/angular-chart.min.js'];
+    var src = ['www/js/**/app.js', 'www/js/**/translations.js', 'www/js/controllers/**/*.js', 'www/js/services/**/*.js' ];
 
     if (demoMode) {
         src = src.concat('www/lib/angular-mocks/**/angular-mocks.js');
@@ -99,7 +100,7 @@ function concatApp() {
             .pipe(gulpif(!demoMode, removeCode({production: true})))
             .pipe(gulp.dest('./dist/js')),
 
-        gulp.src(['www/lib/angular-xeditable/dist/css/xeditable.min.css', 'www/css/**/*.css'])
+        gulp.src(['www/css/**/*.css'])
             .pipe(concat('style.css'))
             .pipe(gulp.dest('./dist/css/'))
     )
@@ -165,7 +166,8 @@ function addDemoMock() {
 
 var defaultSeries = gulp.series(clean,  lint, cdnizeAndCopy, concatApp, partials, replaceSVG, minifyApp, smoosh);
 var packageSeries = gulp.series(clean,  lint, cdnizeAndCopy, concatApp, partials, replaceSVG, minifyApp, smoosh, compress);
-var demoSeries = gulp.series(cleanDemo, lint, cdnizeAndCopy, concatApp, partials, replaceSVG, addDemoMock, minifyApp, smoosh);
+//var demoSeries = gulp.series(cleanDemo, lint, cdnizeAndCopy, concatApp, partials, replaceSVG, addDemoMock, minifyApp, smoosh);
+var demoSeries = gulp.series(cleanDemo, lint, cdnizeAndCopy, concatApp, partials, replaceSVG, addDemoMock);
 var debugSeries = gulp.series(clean,    lint, cdnizeAndCopy, concatApp, partials, replaceSVG);
 
 gulp.task('default', defaultSeries);
