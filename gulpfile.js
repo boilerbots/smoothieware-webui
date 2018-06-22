@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     htmlmin = require('gulp-htmlmin'),
     replace = require('gulp-replace'),
     fs = require('fs'),
-    //smoosher = require('gulp-smoosher')
+    smoosher = require('gulp-smoosher')
     nginclude = require('gulp-nginclude');
 
 var demoMode = false;

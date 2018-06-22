@@ -26,6 +26,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
     "gulp-zip": "^3.2.0",
+    "gulp-smoosher": "^0.0.9",
     "jshint": "^2.9.5",
     "merge-stream": "^1.0.0",
     "orchestrator": "^0.3.7",
