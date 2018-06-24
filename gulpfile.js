@@ -76,10 +76,6 @@ function cdnizeAndCopy() {
                 cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/js/xeditable.min.js'
             }]))
             .pipe(cdnizer([{
-                file: 'lib/angular-local-storage/dist/angular-local-storage.min.js',
-                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.7.1/angular-local-storage.min.js'
-            }]))
-            .pipe(cdnizer([{
                 file: 'lib/ng-file-upload/ng-file-upload.min.js',
                 cdn: 'https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js'
             }]))

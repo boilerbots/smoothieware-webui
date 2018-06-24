@@ -5,9 +5,9 @@
         .module('smoothieApp')
         .controller('TempCtrl', TempCtrl);
 
-    TempCtrl.$inject = ['$interval', 'DataService', 'localStorageService'];
+    TempCtrl.$inject = ['$interval', 'DataService'];
 
-    function TempCtrl($interval, DataService, localStorageService) {
+    function TempCtrl($interval, DataService) {
         var vm = this;
 
         vm.secondExtruder = DataService.secondExtruderState();
@@ -46,8 +46,8 @@
         };
 
         vm.localTempInterval = {};
-        vm.tempInterval = localStorageService.get('tempInterval') || 3;
-        vm.autoCheckEnabled = localStorageService.get('autoCheckEnabled') == "true";
+        vm.tempInterval = localStorage.tempInterval || 3;
+        vm.autoCheckEnabled = localStorage.autoCheckEnabled == "true";
 
         vm.heaterT0SelectedTemp = 0;
         vm.heaterT0ActualTemp = "-";
@@ -162,18 +162,18 @@
         function onAutoCheckChange() {
             if (vm.autoCheckEnabled) {
                 vm.localTempInterval = $interval(vm.onTimeout, vm.tempInterval * 1000);
-                localStorageService.set('autoCheckEnabled', "true");
+                localStorage.autoCheckEnabled = "true";
 
                 vm.getTemperatures();
             } else {
                 if (angular.isDefined(vm.localTempInterval))
                     $interval.cancel(vm.localTempInterval);
-                localStorageService.set('autoCheckEnabled', "false");
+                localStorage.autoCheckEnabled = "false";
             }
         }
 
         function onTempIntervalChange() {
-            localStorageService.set('tempInterval', vm.tempInterval);
+            localStorage.tempInterval = vm.tempInterval;
 
             if (angular.isDefined(vm.localTempInterval))
                 $interval.cancel(vm.localTempInterval);

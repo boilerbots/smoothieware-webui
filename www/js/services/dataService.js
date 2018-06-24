@@ -5,13 +5,13 @@
         .module('smoothieApp')
         .factory('DataService', DataService);
 
-    DataService.$inject = ['$http', 'localStorageService'];
+    DataService.$inject = ['$http'];
 
-    function DataService($http, localStorageService) {
+    function DataService($http) {
         var url = "/command";
 
         var extruderState = {
-            supportEnabled: localStorageService.get('secondExtruderSupportEnabled') == "true"
+            supportEnabled: localStorage.secondExtruderSupportEnabled == "true"
         }
 
         var output = [];
@@ -56,7 +56,7 @@
         }
 
         function updateSecondExtruder() {
-            localStorageService.set('secondExtruderSupportEnabled', extruderState.supportEnabled ? "true" : "false");
+            localStorage.secondExtruderSupportEnabled = extruderState.supportEnabled ? "true" : "false";
         }
     }
 })();

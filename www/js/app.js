@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('smoothieApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'gettext', 'ngSanitize', 'xeditable', 'LocalStorageModule', 'ngFileUpload',
+        .module('smoothieApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'gettext', 'ngSanitize', 'xeditable', 'ngFileUpload',
             //removeIf(demo)
             /*
             //endRemoveIf(demo)
@@ -13,18 +13,12 @@
             */
             //endRemoveIf(demo)
             ])
-        .config(ConfigBlock)
         .run(RunBlock);
 
-    RunBlock.$inject = ['gettextCatalog', 'localStorageService', 'editableOptions', '$httpBackend'];
-    ConfigBlock.$inject = ['localStorageServiceProvider'];
+    RunBlock.$inject = ['gettextCatalog', 'editableOptions', '$httpBackend'];
 
-    function ConfigBlock(localStorageServiceProvider) {
-        localStorageServiceProvider.setPrefix('smoothieApp');
-    }
-
-    function RunBlock(gettextCatalog, localStorageService, editableOptions, $httpBackend) {
-        gettextCatalog.setCurrentLanguage(localStorageService.get('currentLanguage') || 'en');
+    function RunBlock(gettextCatalog, editableOptions, $httpBackend) {
+        gettextCatalog.setCurrentLanguage(localStorage.currentLanguage || 'en');
         gettextCatalog.debug = true;
 
         editableOptions.theme = 'bs3';

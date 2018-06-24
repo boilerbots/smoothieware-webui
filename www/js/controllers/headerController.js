@@ -5,12 +5,12 @@
         .module('smoothieApp')
         .controller('HeaderCtrl', HeaderCtrl);
 
-    HeaderCtrl.$inject = ['gettextCatalog', 'localStorageService'];
+    HeaderCtrl.$inject = ['gettextCatalog'];
 
-    function HeaderCtrl(gettextCatalog, localStorageService) {
+    function HeaderCtrl(gettextCatalog) {
         var vm = this;
 
-        vm.printerName = localStorageService.get('printerName') || 'Your printer name';
+        vm.printerName = localStorage.printerName || 'Your printer name';
 
         // Language switcher
         vm.languages = {
@@ -30,11 +30,11 @@
         function setLanguage(item) {
             vm.languages.current = item;
             gettextCatalog.setCurrentLanguage(item);
-            localStorageService.set('currentLanguage', vm.languages.current);
+            localStorage.currentLanguage = vm.languages.current;
         }
 
         function updatePrinterName() {
-            localStorageService.set('printerName', vm.printerName);
+            localStorage.printerName = vm.printerName;
         }
     }
 })();
