@@ -27,10 +27,10 @@
             borderColor: "rgba(247, 70, 74, 0.5)"
         }];
 
-        //Chart.defaults.global.elements.point.radius = 0;
-        //Chart.defaults.global.legend.position = "bottom";
-        //Chart.defaults.global.animation.duration = 0;
-        //Chart.defaults.global.elements.line.borderWidth = 1;
+        Chart.defaults.global.elements.point.radius = 0;
+        Chart.defaults.global.legend.position = "bottom";
+        Chart.defaults.global.animation.duration = 0;
+        Chart.defaults.global.elements.line.borderWidth = 1;
 
         vm.options = {
             tooltips: {

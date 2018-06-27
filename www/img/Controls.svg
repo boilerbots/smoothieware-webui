@@ -1,0 +1,24 @@
+
+<svg width="300" height="200">
+    <g id="HomeAll" data-ng-click="motoVM.jogButtonClick('G28')" transform="translate(100, 100)">
+        <rect x="0" y="0" rx="5" ry="5" width="50" height="50" style="fill:white;stroke:black;stroke-width:1;opacity:0.5" />
+        <use x="15" y="16" width="20" height="18" xlink:href="#HomeIcon"/>
+    </g>
+    <g id="HomeX" data-ng-click="motoVM.jogButtonClick('G28 X0')" transform="translate(150, 100)">
+        <rect x="0" y="0" rx="5" ry="5" width="50" height="50" style="fill:red;stroke:black;stroke-width:1;opacity:0.5" />
+        <use x="15" y="16" width="20" height="18" xlink:href="#HomeIcon"/>
+        <text x="20" y="48" class="home">X</text>
+    </g>
+    <g id="HomeZ" data-ng-click="motoVM.jogButtonClick('G28 Z0')" transform="translate(200, 100)">
+        <rect x="0" y="0" rx="5" ry="5" width="50" height="50" style="fill:DarkSeaGreen;stroke:black;stroke-width:1;opacity:0.5" />
+        <use x="15" y="16" width="20" height="18" xlink:href="#HomeIcon"/>
+        <text x="20" y="48" class="home">Z</text>
+    </g>
+
+    <symbol id="HomeIcon" viewBox="0 0 20 18" pointer-events="none">
+        <desc>HomeIcon - house</desc>
+        <path class="home" d="M3,18 v-8 l7,-6 l7,6 v8 h-5 v-6 h-4 v6 z" fill="black"/>
+        <path class="home" d="M0,10 l10-8.5 l10,8.5" stroke-width="1.5" fill="none"/>
+        <path class="home" d="M15,3 v2.8 l1,.8 v-3.6 z"/>
+    </symbol>
+</svg>

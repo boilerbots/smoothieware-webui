@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('smoothieApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'gettext', 'ngSanitize', 'xeditable', 'ngFileUpload',
+        .module('smoothieApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'gettext', 'ngSanitize', 'xeditable', 'ngFileUpload', 'chart.js',
             //removeIf(demo)
             /*
             //endRemoveIf(demo)
@@ -13,6 +13,13 @@
             */
             //endRemoveIf(demo)
             ])
+        .config(['ChartJsProvider', function (ChartJsProvider) {
+            ChartJsProvider.setOptions({
+                colours: ['#FDB45C', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+                responsive: true,
+                maintainAspectRatio: false
+            });
+        }])
         .run(RunBlock);
 
     RunBlock.$inject = ['gettextCatalog', 'editableOptions', '$httpBackend'];

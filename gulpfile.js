@@ -79,6 +79,14 @@ function cdnizeAndCopy() {
                 file: 'lib/ng-file-upload/ng-file-upload.min.js',
                 cdn: 'https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js'
             }]))
+            .pipe(cdnizer([{
+                file: 'lib/angular-chart/dist/angular-chart.min.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js'
+            }]))
+            .pipe(cdnizer([{
+                file: 'lib/Chart/chart.js/Chart.min.js',
+                cdn: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'
+            }]))
             .pipe(gulp.dest('dist'))
     )
 }
@@ -114,8 +122,11 @@ function partials() {
 
 function replaceSVG() {
     return gulp.src('dist/index.html')
-        .pipe(replace(/<!-- replaceSVG --><data-ng-include src="'img\/jogdial.svg'"><\/data-ng-include><!-- \/replaceSVG -->/g, function (match, p1) {
-            return fs.readFileSync('www/img/jogdial.svg', 'utf8');
+        //.pipe(replace(/<!-- replaceSVG --><data-ng-include src="'img\/jogdial.svg'"><\/data-ng-include><!-- \/replaceSVG -->/g, function (match, p1) {
+        //    return fs.readFileSync('www/img/jogdial.svg', 'utf8');
+        //}))
+        .pipe(replace(/<!-- replaceSVG --><data-ng-include src="'img\/Controls.svg'"><\/data-ng-include><!-- \/replaceSVG -->/g, function (match, p1) {
+            return fs.readFileSync('www/img/Controls.svg', 'utf8');
         }))
         .pipe(gulp.dest('dist'))
 }
