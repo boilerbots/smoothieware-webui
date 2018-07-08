@@ -52,16 +52,16 @@
         }
 
         function print(file) {
-            console.log('print file - ' + file);
+            console.log('print file - ' + file.filename);
 
-            DataService.runCommand("play /sd/" + file)
+            DataService.runCommand("M32 " + file.filename)
                 .then(function (result) {
                     console.log('Result: ' + result);
                 });
         }
 
         function progress() {
-            DataService.runCommand("progress")
+            DataService.runCommand("M27")
                 .then(function (result_data) {
                     DataService.broadcastCommand(result_data);
                 }, function (error) {
@@ -70,7 +70,7 @@
         }
 
         function abort() {
-            DataService.runCommand("abort")
+            DataService.runCommand("M26")
                 .then(function (result_data) {
                     DataService.broadcastCommand(result_data);
                 }, function (error) {

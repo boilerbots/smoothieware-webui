@@ -19,11 +19,26 @@
         vm.jogButtonClick = jogButtonClick;
         vm.jogXYClick = jogXYClick;
         vm.jogZClick = jogZClick;
+        vm.loadFillament = loadFillament;
+        vm.removeFillament = removeFillament;
+        vm.clearTray = clearTray;
 
         ////////////////
 
         function homeAxis(axis) {
             console.log('Home axis: ' + axis);
+            var response = true;
+            if (axis == "Z" || axis == "") {
+                response = confirm("Confirm Z axis move");
+            }
+            if (response) {
+                DataService.runCommand("G28 " + axis)
+                    .then(function (result) {
+                        console.log('Result: ' + result);
+                    }, function (error) {
+                        console.error(error.statusText);
+                    });
+            }
         }
 
         function motorsOff() {
@@ -63,6 +78,36 @@
             console.log('jogZClick - ' + cmd);
 
             DataService.runCommand("G91 G0 " + cmd + " F" + vm.z_velocity + " G90")
+                .then(function (result) {
+                    console.log('Result: ' + result);
+                }, function (error) {
+                    console.error(error.statusText);
+                });
+        }
+
+        function loadFillament() {
+            console.log('loadFillament');
+            DataService.runCommand("M32 scripts/load_fillament.gcode")
+                .then(function (result) {
+                    console.log('Result: ' + result);
+                }, function (error) {
+                    console.error(error.statusText);
+                });
+        }
+
+        function removeFillament() {
+            console.log('removeFillament');
+            DataService.runCommand("M32 scripts/remove_fillament.gcode")
+                .then(function (result) {
+                    console.log('Result: ' + result);
+                }, function (error) {
+                    console.error(error.statusText);
+                });
+        }
+
+        function clearTray() {
+            console.log('clearTray');
+            DataService.runCommand("M32 scripts/clear_tray.gcode")
                 .then(function (result) {
                     console.log('Result: ' + result);
                 }, function (error) {

@@ -88,6 +88,8 @@
                     regexResult = regex.exec(data);
                     bedSelectedTemp = Number(regexResult[1]).toFixed(1);
                 }
+            } else if (data == "M32") {
+              result = "Printing " + data;
             } else if (data == "progress") {
                 result = "Nothing is printed";
             } else if (data == "abort") {

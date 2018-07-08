@@ -1,24 +1,103 @@
 
-<svg width="300" height="200">
-    <g id="HomeAll" data-ng-click="motoVM.jogButtonClick('G28')" transform="translate(100, 100)">
-        <rect x="0" y="0" rx="5" ry="5" width="50" height="50" style="fill:white;stroke:black;stroke-width:1;opacity:0.5" />
+<svg width="400" height="300">
+    <g id="HomeAll" data-ng-click="motoVM.homeAxis('')" transform="translate(30, 10)">
+        <rect class="btn" x="0" y="0" rx="5" ry="5" width="50" height="50" fill="white" />
         <use x="15" y="16" width="20" height="18" xlink:href="#HomeIcon"/>
     </g>
-    <g id="HomeX" data-ng-click="motoVM.jogButtonClick('G28 X0')" transform="translate(150, 100)">
-        <rect x="0" y="0" rx="5" ry="5" width="50" height="50" style="fill:red;stroke:black;stroke-width:1;opacity:0.5" />
+    <g id="HomeX" data-ng-click="motoVM.homeAxis('XY')" transform="translate(90, 10)">
+        <rect class="btn" x="0" y="0" rx="5" ry="5" width="50" height="50" fill="blue" />
         <use x="15" y="16" width="20" height="18" xlink:href="#HomeIcon"/>
-        <text x="20" y="48" class="home">X</text>
+        <text x="15" y="48" class="home">XY</text>
     </g>
-    <g id="HomeZ" data-ng-click="motoVM.jogButtonClick('G28 Z0')" transform="translate(200, 100)">
-        <rect x="0" y="0" rx="5" ry="5" width="50" height="50" style="fill:DarkSeaGreen;stroke:black;stroke-width:1;opacity:0.5" />
+    <g id="HomeZ" data-ng-click="motoVM.homeAxis('Z')" transform="translate(150, 10)">
+        <rect class="btn" x="0" y="0" rx="5" ry="5" width="50" height="50" fill="blue" />
         <use x="15" y="16" width="20" height="18" xlink:href="#HomeIcon"/>
         <text x="20" y="48" class="home">Z</text>
     </g>
 
-    <symbol id="HomeIcon" viewBox="0 0 20 18" pointer-events="none">
-        <desc>HomeIcon - house</desc>
-        <path class="home" d="M3,18 v-8 l7,-6 l7,6 v8 h-5 v-6 h-4 v6 z" fill="black"/>
-        <path class="home" d="M0,10 l10-8.5 l10,8.5" stroke-width="1.5" fill="none"/>
-        <path class="home" d="M15,3 v2.8 l1,.8 v-3.6 z"/>
-    </symbol>
+    <g id="Pause" data-ng-click="motoVM.jogButtonClick('M600')" transform="translate(320, 60)">
+        <circle class="panic" cx="0" cy="0" r="40" fill="yellow" />
+    </g>
+    <g id="Resume" data-ng-click="motoVM.jogButtonClick('M601')" transform="translate(290, 220)">
+        <rect class="btn" x="0" y="0" rx="1" ry="1" width="60" height="25" fill="green" />
+        <text class="btn" x="4" y="20">Resume</text>
+    </g>
+
+    <g id="Clear" data-ng-click="motoVM.clearTray()" transform="translate(30, 100)">
+        <rect class="btn" x="0" y="0" rx="5" ry="5" width="50" height="50" fill="red" />
+        <text x="8" y="25" class="home">Clear</text>
+        <text x="10" y="40" class="home">Tray</text>
+    </g>
+
+
+    <g id="Load" data-ng-click="motoVM.loadFillament()" transform="translate(90, 200)">
+        <rect class="btn" x="0" y="0" rx="5" ry="5" width="50" height="50" fill="orange" />
+        <text x="8" y="30" class="home">Load</text>
+    </g>
+    <g id="Remove" data-ng-click="motoVM.removeFillament()" transform="translate(150, 200)">
+        <rect class="btn" x="0" y="0" rx="5" ry="5" width="65" height="50" fill="orange" />
+        <text x="4" y="30" class="home">Remove</text>
+    </g>
+
+    <style type="text/css">
+
+        text {
+            font-family: helvetica;
+            stroke: black;
+            stroke-width: 1;
+            fill: black;
+        }
+
+        text.btn {
+            font-family: helvetica;
+            stroke: black;
+            stroke-width: 1;
+            fill: black;
+            pointer-events: none;
+        }
+
+
+        text.home {
+            font-family: helvetica;
+            stroke: black;
+            stroke-width: 1;
+            fill: black;
+            font-weight: 900;
+            font-size: 16;
+            pointer-events: none;
+        }
+
+        path.home {
+            stroke: black;
+        }
+
+        rect.btn {
+            stroke: black;
+            stroke-width: 1;
+            opacity: 0.5;
+        }
+
+        rect.btn:hover {
+            opacity: 1.0;
+        }
+
+        circle.panic {
+            stroke: black;
+            stroke-width: 1;
+            opacity: 0.5;
+        }
+
+        circle.panic:hover {
+            opacity: 1.0;
+        }
+    </style>
+
+    <defs>
+        <symbol id="HomeIcon" viewBox="0 0 20 18" pointer-events="none">
+            <desc>HomeIcon - house</desc>
+            <path class="home" d="M3,18 v-8 l7,-6 l7,6 v8 h-5 v-6 h-4 v6 z" fill="black"/>
+            <path class="home" d="M0,10 l10-8.5 l10,8.5" stroke-width="1.5" fill="none"/>
+            <path class="home" d="M15,3 v2.8 l1,.8 v-3.6 z"/>
+        </symbol>
+    </defs>
 </svg>
